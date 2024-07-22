@@ -1,0 +1,28 @@
+
+quarkus:
+  web-bundler:
+    bundle.main: true
+    #profile: true
+
+    dependencies.type: webjars
+
+  log:
+    console:
+      darken: 2
+
+  datasource:
+    db-kind: postgresql
+    username: hh
+    password: hh
+    jdbc:
+      url: jdbc:postgresql://localhost:5532/hh
+
+
+  # `update` | 'drop-and-create'
+  hibernate-orm:
+    database:
+      default-schema: public
+      generation: update
+
+timeslot:
+  duration-minutes: 15

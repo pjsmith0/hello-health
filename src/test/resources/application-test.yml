@@ -1,0 +1,28 @@
+
+quarkus:
+  web-bundler:
+    bundle.main: true
+    #profile: true
+
+    dependencies.type: webjars
+
+  log:
+    console:
+      darken: 2
+
+  datasource:
+    db-kind: postgresql
+    username: hh
+    password: hh
+    jdbc:
+      url: jdbc:postgresql://localhost:5532/hh_tests
+
+
+  # drop and create the database at startup (use `update` to only update the schema)
+  hibernate-orm:
+    database:
+      default-schema: public
+      generation: drop-and-create
+
+timeslot:
+  duration-minutes: 15
