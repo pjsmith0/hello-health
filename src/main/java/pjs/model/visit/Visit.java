@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import pjs.model.patient.Patient;
 import pjs.model.timeslot.TimeSlot;
 
@@ -32,7 +31,7 @@ public class Visit {
     private UUID id;
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.MERGE)
     private TimeSlot timeSlot;
 
     @NotNull

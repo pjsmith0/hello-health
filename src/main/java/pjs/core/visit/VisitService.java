@@ -47,8 +47,19 @@ public class VisitService {
     public VisitDTO update(UpdateVisitDTO updateVisitDTO) {
         Visit visit = visitRepository.get(updateVisitDTO.getId());
 
-        //Patient patient = patientService.get(updateVisitDTO.getPatientId());
-        //TimeSlot timeSlot = timeSlotService.get(updateVisitDTO.getTimeSlotId());
+        visit.setVisitType(updateVisitDTO.getVisitType());
+        visit.setVisitReason(updateVisitDTO.getVisitReason());
+        visit.setFamilyHistory(updateVisitDTO.getFamilyHistory());
+
+        if (visit.getPatient().getId() != updateVisitDTO.getPatientId()) {
+            Patient patient = patientService.get(updateVisitDTO.getPatientId());
+            visit.setPatient(patient);
+        }
+
+        if (visit.getTimeSlot().getId() != updateVisitDTO.getTimeSlotId()) {
+            TimeSlot timeSlot = timeSlotService.get(updateVisitDTO.getTimeSlotId());
+            visit.setTimeSlot(timeSlot);
+        }
 
         visitRepository.save(visit);
 

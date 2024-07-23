@@ -22,7 +22,7 @@ quarkus:
   hibernate-orm:
     database:
       default-schema: public
-      generation: update
+      generation: drop-and-create
 
 timeslot:
   duration-minutes: 15

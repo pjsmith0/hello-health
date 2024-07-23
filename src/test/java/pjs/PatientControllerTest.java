@@ -15,31 +15,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 @QuarkusTest
 public class PatientControllerTest {
 
-    @Inject
-    private PatientService patientService;
-
-    private List<Patient> patients = List.of(
-            Patient.builder()
-                    .surname("Johnson")
-                    .name("John")
-                    .dateOfBirth(LocalDate.of(1990, 7, 10))
-                    .socialSecurityNumber("009-84-3389")
-                    .build(),
-            Patient.builder()
-                    .surname("Williams")
-                    .name("Mary")
-                    .dateOfBirth(LocalDate.of(2002, 8, 2))
-                    .socialSecurityNumber("433-71-0782")
-                    .build(),
-            Patient.builder()
-                    .surname("Brown")
-                    .name("Michael")
-                    .dateOfBirth(LocalDate.of(1999, 10, 4))
-                    .socialSecurityNumber("576-32-1375")
-                    .build()
-    );
-
-
     @Test
     void testListPatients() {
 
@@ -50,7 +25,7 @@ public class PatientControllerTest {
                 .then()
                 .assertThat()
                 .statusCode(200)
-                .body("list.size()", equalTo(3));
+                .body("list.size()", equalTo(10));
 
     }
 }

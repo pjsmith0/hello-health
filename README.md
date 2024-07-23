@@ -48,3 +48,8 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 
 You can then execute your native executable with: `./build/hello-health-1.0.0-SNAPSHOT-runner`
 
+
+## TODO's
+- Implement test profile with test DB
+- Improve swagger-ui doc descriptions
+

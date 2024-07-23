@@ -90,8 +90,7 @@ public class VisitControllerTest {
                 .body("visitType", is("HOME"))
                 .body("visitReason", is("RECURRING_VISIT"))
                 .body("patient.id", is(patients.get(0).getId().toString()))
-                .body("timeSlot.id", is(timeSlots.get(0).getId().toString()))
-        ;
+                .body("timeSlot.id", is(timeSlots.get(0).getId().toString()));
     }
 
     @Test
@@ -122,9 +121,8 @@ public class VisitControllerTest {
                 .statusCode(200)
                 .body("visitType", is("HOME"))
                 .body("visitReason", is("RECURRING_VISIT"))
-                .body("patient.id", is(patients.get(0).getId().toString()))
-                .body("timeSlot.id", is(timeSlots.get(0).getId().toString()))
-        ;
+                .body("patient.id", is(patients.get(1).getId().toString()))
+                .body("timeSlot.id", is(timeSlots.get(1).getId().toString()));
     }
 
     @Test
@@ -143,11 +141,38 @@ public class VisitControllerTest {
                 .delete("/visit/" + createdVisit.getId().toString())
                 .then()
                 .assertThat()
-                .statusCode(200)
-        ;
+                .statusCode(200);
 
         Visit deletedVisit = visitService.get(createdVisit.getId());
         assertThat(deletedVisit, is(nullValue()));
+    }
+
+    @Test
+    void testNoDoubleVisits() {
+
+        VisitDTO visit1 = visitService.create(CreateVisitDTO.builder()
+                .patientId(patients.get(2).getId())
+                .timeSlotId(timeSlots.get(2).getId())
+                .visitType(VisitType.HOME)
+                .visitReason(VisitReason.RECURRING_VISIT)
+                .build());
+
+        given()
+                .contentType("application/json")  //another way to specify content type
+                .body(CreateVisitDTO.builder()
+                        .patientId(patients.get(2).getId())
+                        .timeSlotId(timeSlots.get(2).getId())
+                        .visitType(VisitType.HOME)
+                        .visitReason(VisitReason.RECURRING_VISIT)
+                        .familyHistory("")
+                        .build()
+                )
+                .when()
+                .post("/visit")
+                .then()
+                .assertThat()
+                .statusCode(500);
+
     }
 
 }
