@@ -52,4 +52,5 @@ You can then execute your native executable with: `./build/hello-health-1.0.0-SN
 ## TODO's
 - Implement test profile with test DB
 - Improve swagger-ui doc descriptions
+- Add flyway
 
